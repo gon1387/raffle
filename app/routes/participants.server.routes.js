@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/participants/:participantId')
 		.get(participants.read)
-		.put(users.requiresLogin, participants.hasAuthorization, participants.update)
-		.delete(users.requiresLogin, participants.hasAuthorization, participants.delete);
+		.put(users.requiresLogin, participants.update)
+		.delete(users.requiresLogin, participants.delete);
 
 	// Finish by binding the Participant middleware
 	app.param('participantId', participants.participantByID);
