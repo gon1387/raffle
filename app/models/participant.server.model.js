@@ -16,13 +16,28 @@ var ParticipantSchema = new Schema({
 		required: 'Please fill Participant name',
 		trim: true
 	},
-	created: {
-		type: Date,
-		default: Date.now
+	firstname: {
+		type: String,
+		required: 'Please fill participan\'s firstname',
+		trim: true
 	},
-	user: {
+	middlename: {
+		type: String,
+		require: 'Please fill participant\'s middlename',
+		trim: true
+	},
+	lastname: {
+		type: String,
+		require: 'Please fill participant\'s lastname',
+		trim: true
+	},
+	isPresent: {
+		type: Boolean,
+		default: false
+	},
+	picture: {
 		type: Schema.ObjectId,
-		ref: 'User'
+		ref: 'Picture'
 	}
 });
 

@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require('path');
+
 module.exports = {
 	app: {
 		title: 'raffle',
@@ -41,5 +43,8 @@ module.exports = {
 			'public/lib/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'
 		]
+	},
+	paths: {
+		images: path.resolve(__dirname+'../../../'+'public/images')
 	}
 };
