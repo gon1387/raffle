@@ -10,12 +10,6 @@ var mongoose = require('mongoose'),
  * Participant Schema
  */
 var ParticipantSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Participant name',
-		trim: true
-	},
 	firstname: {
 		type: String,
 		required: 'Please fill participan\'s firstname',
@@ -23,12 +17,12 @@ var ParticipantSchema = new Schema({
 	},
 	middlename: {
 		type: String,
-		require: 'Please fill participant\'s middlename',
+		required: 'Please fill participant\'s middlename',
 		trim: true
 	},
 	lastname: {
 		type: String,
-		require: 'Please fill participant\'s lastname',
+		required: 'Please fill participant\'s lastname',
 		trim: true
 	},
 	isPresent: {
