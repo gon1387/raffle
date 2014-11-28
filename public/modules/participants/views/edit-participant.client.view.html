@@ -6,17 +6,38 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="participant.name" id="name" class="form-control" placeholder="Name" required>
+                    <label class="control-label col-sm-2" for="firstname">Firstname</label>
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="participant.firstname" id="firstname" class="form-control" placeholder="Firstname" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <label class="control-label col-sm-2" for="middlename">Middlename</label>
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="participant.middlename" id="middlename" class="form-control" placeholder="Middlename" required>
+                    </div>
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lastname">Lastname</label>
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="participant.lastname" id="lastname" class="form-control" placeholder="Lastname" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lastname">Present?</label>
+                    <div class="controls col-sm-10">
+                        <div class="btn-group">
+                            <label class="btn" data-ng-class="{'btn-primary': participant.isPresent, 'btn-default': !participant.isPresent}" data-ng-model="participant.isPresent" btn-radio="true">Yes</label>
+                            <label class="btn"  data-ng-class="{'btn-primary': !participant.isPresent, 'btn-default': participant.isPresent}"data-ng-model="participant.isPresent" btn-radio="false">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>

@@ -4,13 +4,14 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="participant in participants" data-ng-href="#!/participants/{{participant._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="participant.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="participant.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="participant.name"></h4>
+			<h4 class="list-group-item-heading">
+				{{participant.lastname + ", " + participant.firstname}}
+				<small class="list-group-item-text"  data-ng-switch on="participant.isPresent">
+	                is
+	                <span class="label label-success" ng-switch-when="true">attending</span>
+	                <span class="label label-default" ng-switch-default>not attending</span>
+				</small>
+			</h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!participants.$resolved || participants.length">
