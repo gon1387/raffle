@@ -13,8 +13,6 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var participant = new Participant(req.body);
-	participant.user = req.user;
-
 	participant.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -88,7 +86,7 @@ exports.list = function(req, res) {
  * Participant middleware
  */
 exports.participantByID = function(req, res, next, id) { 
-	Participant.findById(id).populate('user', 'displayName').exec(function(err, participant) {
+	Participant.findById(id).exec(function(err, participant) {
 		if (err) return next(err);
 		if (! participant) return next(new Error('Failed to load Participant ' + id));
 		req.participant = participant ;
