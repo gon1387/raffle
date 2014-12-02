@@ -29,7 +29,8 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',	
 				'public/lib/angular-csv-import/dist/angular-csv-import.js',
-				'public/lib/papaparse/papaparse.js'
+				'public/lib/papaparse/papaparse.js',
+				'public/lib/async/lib/async.js'
 			]
 		},
 		css: [
