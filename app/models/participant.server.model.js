@@ -29,6 +29,14 @@ var ParticipantSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	isAttending: {
+		type: Boolean,
+		default: false
+	},
+	team: {
+		type: Schema.ObjectId,
+		ref: 'Team'
+	},
 	picture: {
 		type: Schema.ObjectId,
 		ref: 'Picture'
