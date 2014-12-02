@@ -1,0 +1,63 @@
+<section data-ng-controller="ParticipantsImportController" data-ng-init="init()">
+	<div class="page-header">
+		<h1>Import Participants</h1>
+		<p>
+			<a href="data:application/octet-stream,firstname%2Cmiddlename%2Clastname%2CisPresent" download="template.csv">
+				<button type="button" class="btn btn-default btn-sm text-uppercase"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> download template</button>
+			</a>
+		</p>
+		<h6 class="text-muted"><span class="label label-warning">Read First</span> Make sure not to edit the first row of the template</h6>
+	</div>
+	<div class="container-fluid">
+		<div class="row" data-ng-hide="participants">
+			<div class="col-sm-12">
+				<form class="form-horizontal" data-ng-submit="update()" novalidate>
+					<div>
+						<input class="" type="file" data-ng-model="import.csv.file" onchange="angular.element(this).scope().importCSV(this)" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row well well-sm" data-ng-hide="!participants">
+			<a data-ng-click="reset()" data-ng-class="{'btn-primary':import.csv.result.errors.length,'btn-warning':!import.csv.result.errors.length}" class="btn pull-right"><span class="glyphicon glyphicon-repeat"></span> Reset</a>
+			<dl class="dl-horizontal">
+				<dt>Number of records</dt>
+				<dd>{{participants.length}}</dd>
+				<dt>Errors</dt>
+				<dd>{{import.csv.result.errors.length || '0'}} {{!!import.csv.result.errors.length?'(Fix error first)':''}}</dd>
+			</dl>
+			<button data-ng-click="importParticipantsToServer()" data-ng-disabled="import.csv.result.errors.length" class="btn btn-primary pull-right">Import All Participants <span class="badge">{{participants.length}}</span></button>
+			<div class="list-group" data-ng-hide="{{import.csv.result.errors.length > 0}}">
+				<div data-ng-repeat="error in import.csv.result.errors" class="list-group-item">
+					<h4 class="list-group-item-heading text-uppercase">{{($index + 1) + " " + error.type}} <small class="label label-danger text-uppercase">row {{error.row + 1}}</small></h4>
+					<p class="list-group-item-text">{{error.message}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<progressbar value="config.totalSavedParticipants" max="config.totalImportedParticipants" data-ng-hide="!config.isLoading" />
+			</div>
+		</div>
+		<div class="row">
+			<!-- START IMPORTED PARTICIPANTS COLUMN -->
+			<div class="col-sm-12">
+				<div class="list-group">
+					<a data-ng-repeat="participant in participants" data-ng-class="{'list-group-item-success': participant.isSaved, 'list-group-item-warning': !participant.isSaved}" class="list-group-item">
+						<h4 class="list-group-item-heading">
+							<span class="badge">{{$index + 1}} </span>
+							{{participant.lastname + ", " + participant.firstname + " " + participant.middlename}}
+							<small class="list-group-item-text"  data-ng-switch on="participant.isPresent">
+								is
+								<span class="label label-success" ng-switch-when="true">attending</span>
+								<span class="label label-default" ng-switch-default>not attending</span>
+							</small>
+							<span class="glyphicon glyphicon-save pull-right"></span>
+						</h4>
+					</a>
+				</div>
+			</div>
+			<!-- END IMPORTED PARTICIPANTS COLUMN -->
+		</div>
+	</div>
+</section>

@@ -20,6 +20,10 @@ angular.module('participants').config(['$stateProvider',
 		state('editParticipant', {
 			url: '/participants/:participantId/edit',
 			templateUrl: 'modules/participants/views/edit-participant.client.view.html'
+		}).
+		state('importCsvParticipants', {
+			url: '/import/participants/csv',
+			templateUrl: 'modules/participants/views/import-csv-participant.client.view.html'
 		});
 	}
 ]);

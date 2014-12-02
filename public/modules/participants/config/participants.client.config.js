@@ -7,5 +7,6 @@ angular.module('participants').run(['Menus',
 		Menus.addMenuItem('topbar', 'Participants', 'participants', 'dropdown', '/participants(/create)?');
 		Menus.addSubMenuItem('topbar', 'participants', 'List Participants', 'participants');
 		Menus.addSubMenuItem('topbar', 'participants', 'New Participant', 'participants/create');
+		Menus.addSubMenuItem('topbar', 'participants', 'Import', 'import/participants/csv');
 	}
 ]);

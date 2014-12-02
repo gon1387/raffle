@@ -1,7 +1,7 @@
 'use strict';
 
 // Participants controller
-angular.module('participants').controller('ParticipantsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Participants',
+angular.module('participants').controller('ParticipantsController', ['$scope', '$stateParams', '$location', 'Authentication','Participants',
 	function($scope, $stateParams, $location, Authentication, Participants) {
 		$scope.authentication = Authentication;
 
@@ -9,7 +9,10 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 		$scope.create = function() {
 			// Create new Participant object
 			var participant = new Participants ({
-				name: this.name
+				firstname: this.participant.firstname,
+				middlename: this.participant.middlename,
+				lastname: this.participant.lastname,
+				isPresent: this.participant.isPresent
 			});
 
 			// Redirect after save
