@@ -47,7 +47,7 @@ angular.module('participants').controller('ParticipantsImportController', ['$sco
 					if(err);
 					$scope.config.isLoading = false;
 					$scope.participants = participants;
-				})
+				});
 		};
 
 		$scope.resultHandler = function(result){
