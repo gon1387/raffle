@@ -29,9 +29,8 @@ angular.module('participants').controller('ParticipantsImportController', ['$sco
 						firstname: participant.firstname,
 						middlename: participant.middlename, 
 						lastname: participant.lastname, 
-						isPresent: participant.isPresent, 
+						isPresent: participant.isPresent
 					});
-
 					// Redirect after save
 					newParticipant.$save(function(response) {
 						response.isSaved = true;
@@ -56,7 +55,6 @@ angular.module('participants').controller('ParticipantsImportController', ['$sco
 				$scope.import.csv = {};
 			}
 			$scope.import.csv.result = result;
-			console.log(result);
 			$scope.participants = result.data;
 			$scope.config.totalImportedParticipants = $scope.participants.length;
 			$scope.$apply();
