@@ -12,17 +12,14 @@ var mongoose = require('mongoose'),
 var TeamSchema = new Schema({
 	name: {
 		type: String,
-		default: '',
 		required: 'Please fill Team name',
 		trim: true
 	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
+	abbrv: {
+		type: String,
+		required: 'Please fill Team abbreviation',
+		trim: true,
+		uppercase: true
 	}
 });
 

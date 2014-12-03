@@ -9,7 +9,8 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			// Create new Team object
 			var team = new Teams ({
-				name: this.name
+				name: this.name,
+				abbrv: this.abbrv
 			});
 
 			// Redirect after save
