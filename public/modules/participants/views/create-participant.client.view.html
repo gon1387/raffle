@@ -1,46 +1,70 @@
-<section data-ng-controller="ParticipantsController">
-    <div class="page-header">
-        <h1>New Participant</h1>
-    </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="firstname">Firstname</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="participant.firstname" id="firstname" class="form-control" placeholder="Firstname" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="middlename">Middlename</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="participant.middlename" id="middlename" class="form-control" placeholder="Middlename" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="lastname">Lastname</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="participant.lastname" id="lastname" class="form-control" placeholder="Lastname" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="lastname">Present?</label>
-                    <div class="controls col-sm-10">
-                        <div class="btn-group">
-                            <label class="btn" data-ng-class="{'btn-primary': participant.isPresent, 'btn-default': !participant.isPresent}" data-ng-model="participant.isPresent" btn-radio="true">Yes</label>
-                            <label class="btn"  data-ng-class="{'btn-primary': !participant.isPresent, 'btn-default': participant.isPresent}"data-ng-model="participant.isPresent" btn-radio="false">No</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="controls col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-default pull-right">
-                    </div>
-                </div>
+<section data-ng-controller="ParticipantsController" data-ng-init="initData()">
+	<div class="page-header">
+		<h1>New Participant</h1>
+	</div>
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="firstname">Firstname</label>
+					<div class="controls col-sm-10">
+						<input type="text" data-ng-model="participant.firstname" id="firstname" class="form-control" placeholder="Firstname" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="middlename">Middlename</label>
+					<div class="controls col-sm-10">
+						<input type="text" data-ng-model="participant.middlename" id="middlename" class="form-control" placeholder="Middlename" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="lastname">Lastname</label>
+					<div class="controls col-sm-10">
+						<input type="text" data-ng-model="participant.lastname" id="lastname" class="form-control" placeholder="Lastname" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="team">Team</label>
+					<div class="controls col-sm-10">
+						<div class="btn-group" dropdown is-open="status.isopen">
+							<button type="button" class="btn btn-default dropdown-toggle">
+								{{buff.team?buff.team.name:'Select One'}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li data-ng-repeat="team in teams" data-ng-click="buff.team=team;participant.team=team._id"><a class="text-primary">{{team.name}} <span class="text-mute">{{team.abbrv}}</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+                <div class="row well">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="isAttending">Attending?</label>
+						<div class="controls col-sm-10">
+							<div class="btn-group">
+								<label class="btn" data-ng-class="{'btn-primary': participant.isAttending, 'btn-default': !participant.isAttending}" data-ng-model="participant.isAttending" btn-radio="true">Yes</label>
+								<label class="btn"  data-ng-class="{'btn-primary': !participant.isAttending, 'btn-default': participant.isAttending}"data-ng-model="participant.isAttending" btn-radio="false">No</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="lastname">Present?</label>
+						<div class="controls col-sm-10">
+							<div class="btn-group">
+								<label class="btn" data-ng-class="{'btn-primary': participant.isPresent, 'btn-default': !participant.isPresent}" data-ng-model="participant.isPresent" btn-radio="true">Yes</label>
+								<label class="btn"  data-ng-class="{'btn-primary': !participant.isPresent, 'btn-default': participant.isPresent}"data-ng-model="participant.isPresent" btn-radio="false">No</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="controls col-sm-offset-2 col-sm-10">
+						<input type="submit" class="btn btn-primary pull-right">
+					</div>
+				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-            </fieldset>
-        </form>
-    </div>
+			</fieldset>
+		</form>
+	</div>
 </section>

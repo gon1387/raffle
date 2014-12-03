@@ -1,26 +1,23 @@
 'use strict';
 
 // Participants controller
-angular.module('participants').controller('ParticipantsController', ['$scope', '$stateParams', '$location', 'Authentication','Participants',
-	function($scope, $stateParams, $location, Authentication, Participants) {
+angular.module('participants').controller('ParticipantsController', ['$scope', '$stateParams', '$location', 'Authentication','Participants', 'Teams',
+	function($scope, $stateParams, $location, Authentication, Participants, Teams) {
 		$scope.authentication = Authentication;
+		$scope.teams = [];
+		$scope.buff = {};
 
 		// Create new Participant
 		$scope.create = function() {
 			// Create new Participant object
-			var participant = new Participants ({
-				firstname: this.participant.firstname,
-				middlename: this.participant.middlename,
-				lastname: this.participant.lastname,
-				isPresent: this.participant.isPresent
-			});
-
+			var participant = new Participants($scope.participant);
+			console.log(participant);
 			// Redirect after save
 			participant.$save(function(response) {
 				$location.path('participants/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.participant = null;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -64,6 +61,12 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 			$scope.participant = Participants.get({ 
 				participantId: $stateParams.participantId
 			});
+		};
+
+		//initialize data
+		$scope.initData = function(){
+			$scope.teams = Teams.query();
+			$scope.buff = {};
 		};
 	}
 ]);

@@ -3,15 +3,17 @@
         <h1>Participants</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="participant in participants" data-ng-href="#!/participants/{{participant._id}}" data-ng-class="{'list-group-item-success': participant.isPresent}" class="list-group-item">
+        <a data-ng-repeat="participant in participants" data-ng-href="#!/participants/{{participant._id}}" data-ng-class="{'list-group-item-success': (participant.isPresent && participant.isAttending), 'list-group-item-warning': (participant.isPresent + participant.isAttending)==1, 'list-group-item-danger': (participant.isPresent + participant.isAttending)==0}" class="list-group-item">
 			<h4 class="list-group-item-heading">
-				{{participant.lastname + ", " + participant.firstname}}
-				<small class="list-group-item-text"  data-ng-switch on="participant.isPresent">
+				{{participant.lastname + ", " + participant.firstname}} 
+                <span class="text-mute">{{participant.team?'('+participant.team.abbrv+')':''}}</span>
+				<small class="list-group-item-text"  data-ng-switch on="participant.isPresent + participant.isAttending">
 	                is
-	                <span class="label label-success" ng-switch-when="true">attending</span>
-	                <span class="label label-default" ng-switch-default>not attending</span>
+                    <span class="label label-success" ng-switch-when="2">attending and present</span>
+	                <span class="label label-warning" ng-switch-when="1">attending/present</span>
+	                <span class="label label-default" ng-switch-default>not attending and present</span>
 				</small>
-                <span class="glyphicon glyphicon-save pull-right"></span>
+                <span class="glyphicon glyphicon-info-sign pull-right"></span>
 			</h4>
         </a>
     </div>
