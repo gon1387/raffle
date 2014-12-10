@@ -81,6 +81,17 @@ exports.list = function(req, res) {
 		}
 	});
 };
+exports.listRaffle = function(req, res){
+	Participant.find({isPresent: true, isWinner: false}).populate('team').exec(function(err, participants) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(participants);
+		}
+	});
+};
 
 /**
  * Participant middleware

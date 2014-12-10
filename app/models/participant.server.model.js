@@ -33,6 +33,10 @@ var ParticipantSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	isWinner: {
+		type: Boolean,
+		default: false
+	},
 	team: {
 		type: Schema.ObjectId,
 		ref: 'Team'

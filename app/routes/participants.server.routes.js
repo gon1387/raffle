@@ -14,6 +14,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, participants.update)
 		.delete(users.requiresLogin, participants.delete);
 
+	app.route('/raffle/participants')
+		.get(participants.listRaffle);
+
 	// Finish by binding the Participant middleware
 	app.param('participantId', participants.participantByID);
 };
+ 
