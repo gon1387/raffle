@@ -9,11 +9,15 @@ module.exports = function(app) {
 		.get(teams.list)
 		.post(users.requiresLogin, teams.create);
 
+	// Finish by binding the Team middleware
+	app.param('teamId', teams.teamByID);
+
+	app.route('/teams/:teamId/participants')
+		.get(teams.teamParticipants);
+
 	app.route('/teams/:teamId')
 		.get(teams.read)
 		.put(users.requiresLogin, teams.update)
 		.delete(users.requiresLogin, teams.delete);
 
-	// Finish by binding the Team middleware
-	app.param('teamId', teams.teamByID);
 };

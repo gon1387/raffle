@@ -1,0 +1,26 @@
+<section data-ng-controller="RegistrationController" data-ng-init="init()">
+
+	<div class="page-header">
+		<h1>Registration</h1>
+	</div>
+
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="team">Team</label>
+					<div class="controls col-sm-10">
+						<div class="btn-group" dropdown is-open="status.isopen">
+							<button type="button" class="btn btn-default dropdown-toggle">
+								{{team?team.name:'Select One'}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li data-ng-repeat="team in teams" data-ng-click="selectTeam(team)"><a class="text-primary">{{team.name}} <span class="text-mute">{{team.abbrv}}</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

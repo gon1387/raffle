@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Team = mongoose.model('Team'),
+	Participant = mongoose.model('Participant'),
 	_ = require('lodash');
 
 /**
@@ -82,11 +83,22 @@ exports.list = function(req, res) {
 		}
 	});
 };
+exports.teamParticipants = function(req, res) {
+	Participant.find({team: req.team._id}, function(err, participants){
+		if (err){
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(participants);
+		}
+	});
+};
 
 /**
  * Team middleware
  */
-exports.teamByID = function(req, res, next, id) { 
+exports.teamByID = function(req, res, next, id) { console.log(arguments[3] + " " +arguments[4]  );
 	Team.findById(id).exec(function(err, team) {
 		if (err) return next(err);
 		if (! team) return next(new Error('Failed to load Team ' + id));

@@ -7,6 +7,11 @@ angular.module('teams').factory('Teams', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
+			},
+			participants: {
+				url: 'teams/:teamId/participants',
+				method: 'GET',
+				isArray: true
 			}
 		});
 	}

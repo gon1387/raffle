@@ -1,0 +1,58 @@
+<section data-ng-controller="RegistrationController" data-ng-init="init()">
+	<div class="page-header">
+		<h1>Registration</h1>
+	</div>
+
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="team">Team</label>
+					<div class="controls col-sm-10">
+						<div class="btn-group" dropdown is-open="status.isopen">
+							<button type="button" class="btn btn-default dropdown-toggle">
+								{{team?team.name:'Select One'}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li data-ng-repeat="team in teams" data-ng-click="selectTeam(team)"><a class="text-primary">{{team.name}} <span class="text-mute">{{team.abbrv}}</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>			
+		<div class="list-group">
+			<a data-ng-repeat="participant in participants" class="list-group-item" ng-class="{'active': participant.editing}">
+				<div class="list">
+					<h4 class="list-group-item-heading" ng-show="!participant.editing">
+						{{participant.lastname + ", " + participant.firstname}} 
+						<small class="list-group-item-text">
+							is
+							<span class="label label-success" ng-show="participant.isPresent">present</span>
+							<span class="label label-default" ng-show="!participant.isPresent">not on the venue yet</span>
+						</small>
+						<button type="button" ng-click="participant.editing = true" class="btn btn-md btn-warning text-uppercase">
+							<span class="glyphicon glyphicon-log-in"></span> change
+						</button>
+					</h4>
+
+					<h4 class="list-group-item-heading" ng-show="participant.editing">
+						{{participant.firstname + " " + participant.lastname + " is "}} 
+						<span class="btn-group">
+							<label class="btn btn-sm" data-ng-class="{'btn-success': participant.isPresent, 'btn-default': !participant.isPresent}" data-ng-model="participant.isPresent" btn-radio="true">Present</label>
+							<label class="btn btn-sm"  data-ng-class="{'btn-danger	': !participant.isPresent, 'btn-default': participant.isPresent}" data-ng-model="participant.isPresent" btn-radio="false">Not Present</label>
+						</span>
+						<span class="btn-group pull-right">
+							<button type="button" class="btn btn-success btn-sm" ng-click="participant.editing = false; updateParticipant(participant)">
+								<span class="glyphicon glyphicon-floppy-saved"></span> save
+							</button>
+							<button type="button" class="btn btn-default btn-sm" ng-click="participant.editing = false">
+								<span class="glyphicon glyphicon glyphicon-floppy-remove"></span> cancel
+							</button>
+						</span>
+					</h4>
+				</div>
+			</a>
+		</div>
+	</div>
+</section>

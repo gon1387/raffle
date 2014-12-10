@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>Import Participants</h1>
 		<p>
-			<a href="data:application/octet-stream,firstname%2Cmiddlename%2Clastname%2CisPresent" download="template.csv">
+			<a href="data:application/octet-stream,firstname%2Cmiddlename%2Clastname%2CisAttending" download="template.csv">
 				<button type="button" class="btn btn-default btn-sm text-uppercase"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> download template</button>
 			</a>
 		</p>
@@ -47,7 +47,7 @@
 						<h4 class="list-group-item-heading">
 							<span class="badge">{{$index + 1}} </span>
 							{{participant.lastname + ", " + participant.firstname + " " + participant.middlename}}
-							<small class="list-group-item-text"  data-ng-switch on="participant.isPresent">
+							<small class="list-group-item-text"  data-ng-switch on="participant.isAttending">
 								is
 								<span class="label label-success" ng-switch-when="true">attending</span>
 								<span class="label label-default" ng-switch-default>not attending</span>
